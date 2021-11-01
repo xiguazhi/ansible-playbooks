@@ -75,7 +75,6 @@
     lineinfile:
       path: "/home/{{ ans_usr }}/.ssh/authorized_keys"
       line: "{{ pub_key }}"
-
   - name: Disable Password Authentication
     lineinfile:
       path: /etc/ssh/sshd_config
@@ -83,7 +82,6 @@
       line: "PasswordAuthentication no"
       state: present
       backup: yes
-
   - name: Disable Root Login
     lineinfile: 
       path: /etc/ssh/sshd_config
