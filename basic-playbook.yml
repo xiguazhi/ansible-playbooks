@@ -73,8 +73,8 @@
       state: touch
   - name: put pubkey
     lineinfile:
-       path: "/home/{{ans_usr }}/.ssh/authorized_keys"
-       line: "{{ pub_key }}"
+      path: "/home/{{ ans_usr }}/.ssh/authorized_keys"
+      line: "{{ pub_key }}"
 
   - name: Disable Password Authentication
     lineinfile:
@@ -98,6 +98,3 @@
       service:
         name: sshd
         state: restarted
-
-
-
