@@ -47,8 +47,6 @@
           6533
   gather_facts: no
   remote_user: administrator
-  
-  
   become: true
 
   tasks:
@@ -83,13 +81,13 @@
       state: present
       backup: yes
   - name: Disable Root Login
-    lineinfile: 
+    lineinfile:
       path: /etc/ssh/sshd_config
       regexp: '^PermitRootLogin'
       line: "PermitRootLogin no"
       state: present
       backup: yes
-    notify: 
+    notify:
     - restart ssh
   handlers:
     - name: restart ssh
