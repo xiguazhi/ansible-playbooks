@@ -2,10 +2,7 @@
 - hosts: all
   vars:
     - provision_password: '$6$jIrFfxASDby3HBo9$jVw02IOyoqe0gmOUxmnn.QL99hIjsxsNPkehIqJc903iRU6CKYPLHEieI0Ij9Yp291bZOp4b2krZSYSsfxPur/'
-  gather_facts: no
-  remote_user: administrator
-  ans_usr: provision
-  pub_key: !vault |
+    - pub_key: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           64393530646261616336366463363064356137336565633334316363346465386230323335303464
           6363343864303962333361336138663164393536626532650a336531653062616264343938363466
@@ -40,6 +37,16 @@
           31356439356432353037363261623165343763633466316230313230626539333639323763356630
           38363639653664356330326638366534386536376235653338346166323730313633633836333963
           64313865363538373664653862626566333661393935373935333632656265333866
+    - ans_usr: provision
+    - ansible_sudo_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36396630656166353466653630643839366265376635646333356166303436633935396632626465
+          3561366639646365333733653036363835316465373733630a643765316663346133306362396466
+          38343631643331383039613063663434396137316363666363373766316238303337633833663630
+          3331396431373631300a356533636666636235313432333034376162393334343861303364363566
+          6533
+  gather_facts: no
+  remote_user: administrator
   become: true
 
   tasks:
@@ -64,31 +71,26 @@
       state: touch
   - name: put pubkey
     lineinfile:
-       path: "/home/{{ans_usr }}/.ssh/authorized_keys"
-       line: "{{ pub_key }}"
-
+      path: "/home/{{ ans_usr }}/.ssh/authorized_keys"
+      line: "{{ pub_key }}"
   - name: Disable Password Authentication
-      lineinfile: 
-             dest=/etc/ssh/sshd_config
-             regexp='^PasswordAuthentication'
-             line="PasswordAuthentication no"
-             state=present
-             backup=yes
-
-  -name: Disable Root Login
-     lineinfile:
-             dest=/etc/ssh/sshd_config
-             regexp='^PermitRootLogin'
-             line="PermitRootLogin no"
-             state=present
-             backup=yes
-      notify:
-        - restart ssh
-handlers:
-  - name: restart ssh
-    service:
-      name=sshd
-      state=restarted
-
-
-
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^PasswordAuthentication'
+      line: "PasswordAuthentication no"
+      state: present
+      backup: yes
+  - name: Disable Root Login
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^PermitRootLogin'
+      line: "PermitRootLogin no"
+      state: present
+      backup: yes
+    notify:
+    - restart ssh
+  handlers:
+    - name: restart ssh
+      service:
+        name: sshd
+        state: restarted

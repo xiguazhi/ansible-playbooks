@@ -26,9 +26,7 @@ jobs:
         # [optional]
         # Arguments to override a package and its version to be set explicitly.
         # Must follow the example syntax.
-        override-deps: |
-          ansible==2.9
-          ansible-lint==4.2.0
+        override-deps: ""
         # [optional]
         # Arguments to be passed to the ansible-lint
 
@@ -51,4 +49,4 @@ jobs:
         #                         path to directories or files to skip. This option is
         #                         repeatable.
         #   -c C                  Specify configuration file to use. Defaults to ".ansible-lint"
-        args: ""
+        args: "-x 208"
