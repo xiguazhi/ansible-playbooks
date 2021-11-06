@@ -8,6 +8,6 @@ jobs:
     name: Provision VMs with main playbook.
     runs-on: self-hosted
     steps:
-
+      - uses: actions/checkout@v2
       - name: Run ansible playbook
         run: ansible-playbook -i ubuntu.vmware.yml --vault-password-file=${{ secrets.vault_pwd}} ./basic-playbook.yml
