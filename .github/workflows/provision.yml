@@ -1,0 +1,13 @@
+name: Provision
+
+on:
+  repository_dispatch:
+    types: [Provision]
+  jobs:
+    provision:
+      name: Provision VMs with main playbook.
+      runs-on: self-hosted
+      steps:
+
+        - name: Run ansible playbook
+          run: ansible-playbook -i ubuntu.vmware.yml --vault-password-file=${{ secrets.vault_pwd}} ./basic-playbook.yml

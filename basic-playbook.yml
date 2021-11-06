@@ -45,10 +45,14 @@
           38343631643331383039613063663434396137316363666363373766316238303337633833663630
           3331396431373631300a356533636666636235313432333034376162393334343861303364363566
           6533
+    - certbot_auto_renew_user: xiguazhi
+    - certbot_auto_renew_minute: "20"
+    - certbot_auto_renew_hour: "5"
   gather_facts: no
   remote_user: administrator
   become: true
-
+  roles:
+    - geerlingguy.certbot
   tasks:
   - name: Add a new user named provision
     user:
