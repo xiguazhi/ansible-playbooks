@@ -7,6 +7,9 @@ jobs:
   provision:
     name: Provision VMs with main playbook.
     runs-on: self-hosted
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Checkout playbook
         uses: actions/checkout@v2
@@ -19,5 +22,7 @@ jobs:
           repository: xiguazhi/ansible-inventory
           ref: 'main'
 
+      - name: Show current directory
+        run: pwd
       - name: Run ansible playbook
         run: ansible-playbook -i ../ansible-inventory/ubuntu.vmware.yml --vault-password-file=${{ secrets.vault_pwd}} ../ansible-playbooks/basic-playbook.yml
