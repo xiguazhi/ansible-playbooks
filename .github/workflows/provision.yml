@@ -25,4 +25,4 @@ jobs:
       - name: Show current directory
         run: pwd
       - name: Run ansible playbook
-        run: ansible-playbook -i ../ansible-inventory/ubuntu.vmware.yml --vault-password-file=${{ secrets.vault_pwd}} ../ansible-playbooks/basic-playbook.yml
+        run: ansible-playbook -i ../ansible-inventory/ubuntu.vmware.yml --vault-password-file=${{ secrets.vault_pwd}} basic-playbook.yml
