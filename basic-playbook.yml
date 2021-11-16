@@ -37,7 +37,7 @@
           31356439356432353037363261623165343763633466316230313230626539333639323763356630
           38363639653664356330326638366534386536376235653338346166323730313633633836333963
           64313865363538373664653862626566333661393935373935333632656265333866
-    - ans_user: provision
+    - rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
     - ansible_sudo_pass: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36396630656166353466653630643839366265376635646333356166303436633935396632626465
@@ -49,7 +49,7 @@
     - certbot_auto_renew_minute: "20"
     - certbot_auto_renew_hour: "5"
   gather_facts: yes
-  remote_user: provision
+  remote_user: svc-tf-dev
   become: true
   roles:
     - geerlingguy.certbot
