@@ -44,18 +44,17 @@
           36613430303536396538313433663531303362633232303731663064653531333331376366616134
           3362303039326330330a643134616465666136626130633631383063383663623961636638353330
           3538
-    certbot_auto_renew_user: xiguazhi
+    certbot_auto_renew_user: provision
     certbot_auto_renew_minute: "20"
     certbot_auto_renew_hour: "5"
+    provision_user: provision
     ansible_user: svc-tf-dev
   gather_facts: yes
   become: true
-  roles:
-    - geerlingguy.certbot
   tasks:
   - name: Add a new user named provision
     user:
-      name: "{{ ans_usr }}"
+      name: "{{ provision_user }}"
       shell: /bin/bash
       password: "{{ provision_password }}"
 
@@ -66,15 +65,15 @@
 
   - name: Create Directory
     file:
-      path: "/home/{{ ans_usr }}/.ssh"
+      path: "/home/{{ provision_user }}/.ssh"
       state: directory
   - name: Create empty file
     file:
-      path: "/home/{{ ans_usr }}/.ssh/authorized_keys"
+      path: "/home/{{ provision_user }}/.ssh/authorized_keys"
       state: touch
   - name: put pubkey
     lineinfile:
-      path: "/home/{{ ans_usr }}/.ssh/authorized_keys"
+      path: "/home/{{ provision_user }}/.ssh/authorized_keys"
       line: "{{ pub_key }}"
   - name: Disable Password Authentication
     lineinfile:
@@ -92,6 +91,8 @@
       backup: yes
     notify:
     - restart ssh
+  roles:
+    - geerlingguy.certbot
   handlers:
     - name: restart ssh
       service:
