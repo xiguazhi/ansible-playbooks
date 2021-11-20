@@ -51,7 +51,7 @@
     ansible_user: svc-tf-dev
   gather_facts: yes
   become: true
-  tasks:
+  pre_tasks:
   - name: Add a new user named provision
     user:
       name: "{{ provision_user }}"
