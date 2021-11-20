@@ -27,7 +27,9 @@ jobs:
         run: ls
       - name: Use Ansible-Galaxy to download required roles.
         run: ansible-galaxy role install -r requirements.yml
+
       - name: Use Ansible-Galaxy to download required collections.
         run: ansible-galaxy collection install -r requirements.yml
+        
       - name: Run ansible playbook
-        run: ansible-playbook -i ./ansible-inventory/ubuntu.vmware.yml --vault-password-file=${{ secrets.vault_pwd}} basic-playbook.yml
+        run: ansible-playbook -i ./ansible-inventory/ubuntu.vmware.yml --vault-password-file=${{ secrets.vault_pwd}} basic-playbook.yml --extravars "ansible_password=${{ secrets.password }}"
