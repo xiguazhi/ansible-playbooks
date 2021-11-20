@@ -49,7 +49,6 @@
     certbot_auto_renew_hour: "5"
     ansible_user: svc-tf-dev
   gather_facts: yes
-  
   become: true
   roles:
     - geerlingguy.certbot
