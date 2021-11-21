@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars:
-    provision_password: '$6$jIrFfxASDby3HBo9$jVw02IOyoqe0gmOUxmnn.QL99hIjsxsNPkehIqJc903iRU6CKYPLHEieI0Ij9Yp291bZOp4b2krZSYSsfxPur/'
+    provision_password: '$6$DeCR0.MwqRUsAl9V$G.C/QeajMh46Ml3e5qa6eBTUMqCBNCpqNKThRQGBIhFhaDYsEJSxZmAyRE.4ZAaxS2CNdtoQ4UhID4pEJsG7u0'
     pub_key: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           36326131393063616466306266376635386231656264636565633461333163616261613332346361
