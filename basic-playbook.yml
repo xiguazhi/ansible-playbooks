@@ -48,7 +48,7 @@
     certbot_auto_renew_minute: "20"
     certbot_auto_renew_hour: "5"
     provision_user: provision
-    ansible_user: svc-tf-dev
+    ansible_user: provision
   gather_facts: yes
   become: true
   pre_tasks:
